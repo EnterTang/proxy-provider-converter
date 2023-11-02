@@ -6,7 +6,9 @@ if (typeof window !== "undefined") {
   host = window.location.origin;
 }
 
-const convertedUrl = `${host}/api/convert?url=${url}&target=clash`;
+const url = req.query.url;
+const target = req.query.target;
+const convertedUrl = `${host}/api/convert?url=${url}&target=${target}`;
 
 let urlHost = "";
 try {
