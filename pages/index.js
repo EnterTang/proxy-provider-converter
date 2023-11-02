@@ -84,22 +84,19 @@ proxy-groups:
     interval: 1800
     tolerance: 80
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
     
   - name: 🚀 所有节点
     type: select
     url: http://www.gstatic.com/generate_204
     interval: 3600
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
 
   - name: 🔰 香港
     type: url-test
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
     tolerance: 50
     url: http://www.gstatic.com/generate_204    
     interval: 300
@@ -109,8 +106,7 @@ proxy-groups:
   - name: 🔰 美国
     type: url-test
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
     tolerance: 50
     url: http://www.gstatic.com/generate_204    
     interval: 300
@@ -120,8 +116,7 @@ proxy-groups:
   - name: 🔰 日本
     type: url-test
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
     tolerance: 50
     url: http://www.gstatic.com/generate_204    
     interval: 300
@@ -131,8 +126,7 @@ proxy-groups:
   - name: 🔰 英国
     type: url-test
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
     tolerance: 50
     url: http://www.gstatic.com/generate_204    
     interval: 300
@@ -142,8 +136,7 @@ proxy-groups:
   - name: 🔰 台湾
     type: url-test
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
     tolerance: 50
     url: http://www.gstatic.com/generate_204    
     interval: 300
@@ -179,8 +172,7 @@ proxy-groups:
       - 🔰 香港
       - 🚀 节点选择
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
 
   - name: 🎮 游戏服务
     type: select
@@ -188,16 +180,14 @@ proxy-groups:
       - 🕳 全球直连
       - 🚀 节点选择
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
 
   - name: 💰 PayPal
     type: select
     proxies:
       - 🕳 全球直连
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
 
   - name: 📽 国外媒体
     type: select
@@ -205,8 +195,7 @@ proxy-groups:
       - 🚀 节点选择
       - 🕳 全球直连
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
 
   - name: 🆎 AdBlock
     type: select
@@ -227,8 +216,7 @@ proxy-groups:
   - name: 📹 YouTube Premium
     type: select
     use:
-      - app.nloli.xyz
-      - ding.cyuuu.co
+      - ${urlHost || "provider1"}
     proxies:
       - 🚀 节点选择
 

@@ -1,7 +1,7 @@
 const YAML = require("yaml");
 const axios = require("axios");
 
-let host = "";
+let host = "https://proxyprovider.entertang.com";
 if (typeof window !== "undefined") {
   host = window.location.origin;
 }
