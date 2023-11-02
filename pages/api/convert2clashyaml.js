@@ -1,24 +1,29 @@
-// 引入 Axios 库
+const YAML = require("yaml");
 const axios = require("axios");
 
-let host = "";
-if (typeof window !== "undefined") {
-  host = window.location.origin;
-}
+// 异步函数来生成和返回 YAML 格式的内容
+async function generateAndReturnYAML(req, res) {
+  const url = req.query.url;
+  const target = req.query.target;
 
-const url = req.query.url;
-const target = req.query.target;
-const convertedUrl = `${host}/api/convert?url=${url}&target=${target}`;
+  let host = "";
+  if (typeof window !== "undefined") {
+    host = window.location.origin;
+  }
+  const convertedUrl = `${host}/api/convert?url=${url}&target=${target}`;
 
-let urlHost = "";
-try {
-  urlHost = new URL(url).hostname;
-} catch (error) {
-  // Ignore
-}
+  if (url === undefined) {
+    res.status(400).send("Missing parameter: url");
+    return;
+  }
 
-// 异步函数来生成 YAML 内容
-async function generateYAMLContent(url) {
+  let urlHost = "";
+  try {
+    urlHost = new URL(url).hostname;
+  } catch (error) {
+    // Ignore
+  }
+
   const yamlContent = `
   mixed-port: 7890
   allow-lan: true
@@ -433,32 +438,74 @@ async function generateYAMLContent(url) {
     - MATCH,🐟 漏网之鱼
   `;
 
-  return yamlContent;
-}
+    // const yamlObj = yaml.parse(yamlContent);
+    // console.log(yamlObj);
 
-// 处理 GET 请求
-async function handleGETRequest() {
-  const urlParam = new URLSearchParams(window.location.search);
-  const url = urlParam.get("url");
-
-  if (url) {
-    try {
-      const yamlContent = await generateYAMLContent(url);
-      if (yamlContent) {
-        console.log(yamlContent); // 输出 YAML 内容到控制台
-        return yamlContent;
-      }
-    } catch (error) {
-      console.error("生成 YAML 内容失败：", error);
-    }
+  if (target === "surge") {
+    //   const supportedProxies = config.proxies.filter((proxy) =>
+    //   ["ss", "vmess", "trojan"].includes(proxy.type)
+    //   );
+    //   const surgeProxies = supportedProxies.map((proxy) => {
+    //   // 根据你的需求生成 Surge 格式的代理配置
+    //   // 你可以根据需求进行适当的定制化
+    //   // ...
+  
+    //   return result; // 返回 Surge 格式代理配置
+    //   });
+    //   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    //   res.status(200).send(surgeProxies.join("\n"));
   } else {
-    console.error("未提供有效 URL 参数");
+      const response = yamlContent;
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.status(200).send(response);
   }
 
-  return null;
+//   try {
+//     const result = await axios({
+//       url,
+//       headers: {
+//         "User-Agent":
+//           "ClashX Pro/1.72.0.4 (com.west2online.ClashXPro; build:1.72.0.4; macOS 12.0.1) Alamofire/5.4.4",
+//       },
+//     });
+
+//     const configFile = result.data;
+
+//     let config = null;
+//     try {
+//       config = YAML.parse(configFile);
+//     } catch (error) {
+//       res.status(500).send(`Unable to parse config, error: ${error}`);
+//       return;
+//     }
+
+//     if (config.proxies === undefined) {
+//       res.status(400).send("No proxies in this config");
+//       return;
+//     }
+
+//     if (target === "surge") {
+//       const supportedProxies = config.proxies.filter((proxy) =>
+//         ["ss", "vmess", "trojan"].includes(proxy.type)
+//       );
+//       const surgeProxies = supportedProxies.map((proxy) => {
+//         // 根据你的需求生成 Surge 格式的代理配置
+//         // 你可以根据需求进行适当的定制化
+//         // ...
+
+//         return result; // 返回 Surge 格式代理配置
+//       });
+//       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+//       res.status(200).send(surgeProxies.join("\n"));
+//     } else {
+//       const response = YAML.stringify({ proxies: config.proxies });
+//       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+//       res.status(200).send(response);
+//     }
+//   } catch (error) {
+//     res.status(400).send(`Unable to get URL, error: ${error}`);
+//   }
 }
 
-// 调用处理 GET 请求的函数
-handleGETRequest();
-
-// 如果需要将生成的 YAML 内容返回给前端，你可以使用服务器端的响应机制
+// 导出函数以在路由中使用
+module.exports = generateAndReturnYAML;
