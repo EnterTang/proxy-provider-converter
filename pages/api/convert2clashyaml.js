@@ -1,15 +1,15 @@
 const YAML = require("yaml");
 const axios = require("axios");
 
+let host = "";
+if (typeof window !== "undefined") {
+  host = window.location.origin;
+}
 // 异步函数来生成和返回 YAML 格式的内容
 async function generateAndReturnYAML(req, res) {
   const url = req.query.url;
   const target = req.query.target;
 
-  let host = "";
-  if (typeof window !== "undefined") {
-    host = window.location.origin;
-  }
   const convertedUrl = `${host}/api/convert?url=${url}&target=${target}`;
 
   if (url === undefined) {
