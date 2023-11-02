@@ -17,6 +17,10 @@ export default function Home() {
     url
   )}&target=${target}`;
 
+  const convertedclashyaml = `${host}/api/convert2clashyaml?url=${encodeURIComponent(
+    url
+  )}&target=${target}`;
+
   let urlHost = "";
   try {
     urlHost = new URL(url).hostname;
@@ -525,9 +529,9 @@ ${urlHost || "egroup"} = select, policy-path=${convertedUrl}
         </div>
         {url && (
           <div className="break-all p-3 mt-4 rounded-lg text-gray-100 bg-gray-900 shadow-sm w-full">
-            {convertedUrl}
+            {convertedclashyaml}
 
-            <CopyToClipboard text={convertedUrl} onCopy={() => copiedToast()}>
+            <CopyToClipboard text={convertedclashyaml} onCopy={() => copiedToast()}>
               <div className="flex items-center text-sm mt-4 text-gray-400  cursor-pointer  hover:text-gray-300 transition duration-200 select-none">
                 <DuplicateIcon className="h-5 w-5 mr-1 inline-block" />
                 点击复制
