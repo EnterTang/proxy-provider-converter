@@ -1,5 +1,4 @@
 // 引入 Axios 库
-import { useState } from "react";
 const axios = require("axios");
 
 let host = "";
@@ -7,12 +6,7 @@ if (typeof window !== "undefined") {
   host = window.location.origin;
 }
 
-const [url, setUrl] = useState("");
-const [target, setTarget] = useState("clash");
-
-const convertedUrl = `${host}/api/convert?url=${encodeURIComponent(
-  url
-)}&target=${target}`;
+const convertedUrl = `${host}/api/convert?url=${url}&target=clash`;
 
 let urlHost = "";
 try {
