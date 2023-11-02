@@ -61,6 +61,7 @@ async function generateAndReturnYAML(req, res) {
       type: select
       proxies:
         - ♻️ 自动选择
+        - 🚀 手动选择
         - 🔰 香港
         - 🔰 美国
         - 🔰 日本
@@ -76,7 +77,7 @@ async function generateAndReturnYAML(req, res) {
       use:
         - ${urlHost || "provider1"}
       
-    - name: 🚀 所有节点
+    - name: 🚀 手动选择
       type: select
       url: http://www.gstatic.com/generate_204
       interval: 3600
@@ -161,31 +162,26 @@ async function generateAndReturnYAML(req, res) {
       proxies:
         - 🔰 香港
         - 🚀 节点选择
-      use:
-        - ${urlHost || "provider1"}
   
     - name: 🎮 游戏服务
       type: select
       proxies:
         - 🕳 全球直连
         - 🚀 节点选择
-      use:
-        - ${urlHost || "provider1"}
   
     - name: 💰 PayPal
       type: select
       proxies:
         - 🕳 全球直连
-      use:
-        - ${urlHost || "provider1"}
+        - 🚀 节点选择
   
     - name: 📽 国外媒体
       type: select
       proxies:
+        - 🔰 香港
+        - 🔰 美国
         - 🚀 节点选择
         - 🕳 全球直连
-      use:
-        - ${urlHost || "provider1"}
   
     - name: 🆎 AdBlock
       type: select
@@ -200,6 +196,7 @@ async function generateAndReturnYAML(req, res) {
         - 🔰 香港
         - 🔰 美国
         - 🔰 台湾
+        - 🚀 节点选择
       url: 'http://www.youtube.com/generate_204'
       interval: 300
   
@@ -208,6 +205,7 @@ async function generateAndReturnYAML(req, res) {
       use:
         - ${urlHost || "provider1"}
       proxies:
+        - 🔰 香港
         - 🚀 节点选择
   
     - name: 🐟 漏网之鱼
@@ -438,73 +436,13 @@ async function generateAndReturnYAML(req, res) {
     - MATCH,🐟 漏网之鱼
   `;
 
-    // const yamlObj = yaml.parse(yamlContent);
-    // console.log(yamlObj);
-
   if (target === "surge") {
-    //   const supportedProxies = config.proxies.filter((proxy) =>
-    //   ["ss", "vmess", "trojan"].includes(proxy.type)
-    //   );
-    //   const surgeProxies = supportedProxies.map((proxy) => {
-    //   // 根据你的需求生成 Surge 格式的代理配置
-    //   // 你可以根据需求进行适当的定制化
-    //   // ...
-  
-    //   return result; // 返回 Surge 格式代理配置
-    //   });
-    //   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    //   res.status(200).send(surgeProxies.join("\n"));
   } else {
       const response = yamlContent;
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
       res.status(200).send(response);
   }
 
-//   try {
-//     const result = await axios({
-//       url,
-//       headers: {
-//         "User-Agent":
-//           "ClashX Pro/1.72.0.4 (com.west2online.ClashXPro; build:1.72.0.4; macOS 12.0.1) Alamofire/5.4.4",
-//       },
-//     });
-
-//     const configFile = result.data;
-
-//     let config = null;
-//     try {
-//       config = YAML.parse(configFile);
-//     } catch (error) {
-//       res.status(500).send(`Unable to parse config, error: ${error}`);
-//       return;
-//     }
-
-//     if (config.proxies === undefined) {
-//       res.status(400).send("No proxies in this config");
-//       return;
-//     }
-
-//     if (target === "surge") {
-//       const supportedProxies = config.proxies.filter((proxy) =>
-//         ["ss", "vmess", "trojan"].includes(proxy.type)
-//       );
-//       const surgeProxies = supportedProxies.map((proxy) => {
-//         // 根据你的需求生成 Surge 格式的代理配置
-//         // 你可以根据需求进行适当的定制化
-//         // ...
-
-//         return result; // 返回 Surge 格式代理配置
-//       });
-//       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-//       res.status(200).send(surgeProxies.join("\n"));
-//     } else {
-//       const response = YAML.stringify({ proxies: config.proxies });
-//       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-//       res.status(200).send(response);
-//     }
-//   } catch (error) {
-//     res.status(400).send(`Unable to get URL, error: ${error}`);
-//   }
 }
 
 // 导出函数以在路由中使用
