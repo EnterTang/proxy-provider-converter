@@ -202,8 +202,6 @@ async function generateAndReturnYAML(req, res) {
   
     - name: 📹 YouTube Premium
       type: select
-      use:
-        - ${urlHost || "provider1"}
       proxies:
         - 🔰 香港
         - 🚀 节点选择

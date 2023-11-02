@@ -212,8 +212,6 @@ export default function Home() {
   
     - name: 📹 YouTube Premium
       type: select
-      use:
-        - ${urlHost || "provider1"}
       proxies:
         - 🔰 香港
         - 🚀 节点选择
